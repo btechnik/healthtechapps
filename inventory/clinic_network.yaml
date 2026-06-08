@@ -1,0 +1,41 @@
+---
+clinic:
+  name: Heartwell Cardiology Clinic
+  location: Suite 200, Medical Plaza
+
+switch:
+  hostname: cardio-clinic-sw01
+  host: 192.168.1.1
+  device_type: cisco_ios
+  username: admin
+  password: your-password-here
+  secret: your-enable-secret-here
+  management_vlan: 99
+  management_ip: 192.168.1.1
+  management_subnet: 255.255.255.0
+
+vlans:
+  - id: 10
+    name: ADMIN
+    description: Front desk scheduling and billing traffic
+  - id: 20
+    name: CLINICAL
+    description: Cardiologist ECG and patient record traffic
+  - id: 99
+    name: MANAGEMENT
+    description: Switch management access
+
+workstations:
+  - name: Front Desk PC
+    port: GigabitEthernet0/1
+    description: Front Desk - Scheduling and Billing
+    vlan: 10
+    mac_limit: 1
+    role: administrative
+
+  - name: Cardiologist Workstation
+    port: GigabitEthernet0/2
+    description: Cardiology - ECG and Patient Records
+    vlan: 20
+    mac_limit: 1
+    role: clinical
